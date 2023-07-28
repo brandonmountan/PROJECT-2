@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS rentopia_db;
+CREATE DATABASE rentopia_db;
