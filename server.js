@@ -22,8 +22,19 @@ const sess = {
 
 app.use(session(sess));
 
+// Custom handlebars helpers
+const hbs = exphbs.create({helpers});
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+// Set the views directory to point to the correct location
+app.set('views', path.join(__dirname, 'views'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Static route for serving the public directory
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
