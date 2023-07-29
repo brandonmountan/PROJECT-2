@@ -16,6 +16,11 @@ router.post('/', async (req, res) => {
   }
 });
 
+//request to login page
+router.get('/login', async (req, res) => {
+  res.render('login');
+});
+
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
@@ -45,6 +50,31 @@ router.post('/login', async (req, res) => {
 
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+
+//request signup page
+router.get('/sign-up', async (req, res) => {
+  res.render('sign-up');
+});
+
+router.post('/signup', async (req, res) => {
+  try {
+     await User.create({  
+      username: req.body.username, 
+      email: req.body.email,
+      password: req.body.password,
+    });
+    
+    req.session.save(() => { 
+      req.session.loggedIn = true;
+      req.session.username = req.body.username;
+
+      res.redirect('/login'); 
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
