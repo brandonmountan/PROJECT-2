@@ -23,9 +23,10 @@ const sess = {
 };
 
 app.use(session(sess));
-
+const exphbs = require('express-handlebars');
+const helpers = require('./utils/helpers');
 // Custom handlebars helpers
-const hbs = exphbs.create({helpers});
+const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
