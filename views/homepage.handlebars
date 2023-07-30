@@ -19,17 +19,16 @@
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <h2 style="text-decoration: underline;">look forward your desired products</h2>
-                    <p class="w-lg-50"><br>Looking to make a purchase? Find top-notch products<br> available for sale from trusted sellers within our community. With Rentopia,<br> you'll have access to a wide range of quality items at competitive prices.<br><br></p>
+                    <p class="w-lg-50"><br>Looking to make a purchase or Rent? Find top-notch products<br> available for sale from trusted Peoples within our community. With Rentopia,<br> you'll have access to a wide range of quality items at competitive prices.<br><br></p>
                 </div>
             </div>
             <div class="row gx-2 gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3 photos" data-bss-baguettebox="">
-                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
-                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
-                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
-                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
-                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
-                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
-            </div>
+  {{#each imagesData}}
+    <div class="col item">
+      <img class="img-fluid" src="{{this.imageSrc1}}{{this.imageSrc2}}{{this.imageSrc3}}{{this.imageSrc4}}{{this.imageSrc5}}{{this.imageSrc6}}" alt="{{this.altText}}">
+    </div>
+  {{/each}}
+</div>
         </div>
     </section>
     <section class="position-relative py-4 py-xl-5">
@@ -42,11 +41,11 @@
             </div>
             <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
                 <div class="col">
-                    <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                    <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="../public/assets/profilePic/undraw_pic_profile_re_7g2h.svg">
                         <div class="card-body p-4">
                             <p class="text-primary card-text mb-0">Article</p>
                             <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="../public/assets/profilePic/undraw_pic_profile_re_7g2h.svg">
                                 <div>
                                     <p class="fw-bold mb-0">Solomon</p>
                                     <p class="text-muted mb-0">Erat netus</p>
@@ -56,11 +55,11 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                    <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="../public/assets/profilePic/undraw_pic_profile_re_7g2h.svg">
                         <div class="card-body p-4">
                             <p class="text-primary card-text mb-0">Article</p>
                             <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src='../public/assets/profilePic/undraw_pic_profile_re_7g2h.svg'>
                                 <div>
                                     <p class="fw-bold mb-0">Brandon</p>
                                     <p class="text-muted mb-0">Erat netus</p>
@@ -70,11 +69,11 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                    <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="../public/assets/profilePic/undraw_female_avatar_efig.svg">
                         <div class="card-body p-4">
                             <p class="text-primary card-text mb-0">Article</p>
                             <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="../public/assets/profilePic/undraw_female_avatar_efig.svg">
                                 <div>
                                     <p class="fw-bold mb-0">Suzy</p>
                                     <p class="text-muted mb-0">Erat netus</p>
@@ -84,11 +83,11 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                    <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="../public/assets/profilePic/undraw_pic_profile_re_7g2h.svg">
                         <div class="card-body p-4">
                             <p class="text-primary card-text mb-0">Article</p>
                             <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="../public/assets/profilePic/undraw_pic_profile_re_7g2h.svg">
                                 <div>
                                     <p class="fw-bold mb-0">Jordan</p>
                                     <p class="text-muted mb-0">Erat netus</p>
