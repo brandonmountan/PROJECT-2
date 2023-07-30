@@ -26,6 +26,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/product', async (req, res) => {
+  res.render('product');
+});
+
 router.get('/item/:id', async (req, res) => {
   try {
     const itemData = await Item.findByPk(req.params.id, {
@@ -75,6 +79,11 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
+});
+
+router.get('/sign-up', async (req, res) => {
+  console.log("Rendering signup view");
+  res.render('sign-up');
 });
 
 module.exports = router;

@@ -53,11 +53,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-//request signup page
-router.get('/sign-up', async (req, res) => {
-  res.render('sign-up');
-});
-
 router.post('/signup', async (req, res) => {
   try {
      await User.create({  
@@ -70,7 +65,7 @@ router.post('/signup', async (req, res) => {
       req.session.loggedIn = true;
       req.session.username = req.body.username;
 
-      res.redirect('/login'); 
+      res.redirect('/'); 
     });
   } catch (err) {
     console.log(err);
