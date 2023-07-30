@@ -15,6 +15,30 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+router.get('/search', async (req, res) => {
+  try {
+    // Extract the search query from the URL
+    const query = req.query.query;
+
+    // Search the items based on the query
+    const itemData = await Item.findAll({
+      where: {
+        name: {
+          [require('sequelize').Op.like]: `%${query}%`
+        }
+      }
+    });
+
+const items = itemData.map((item) => item.get({ plain: true }));
+
+res.render('search-results', { 
+  items, 
+  logged_in: req.session.logged_in 
+});
+} catch (err) {
+res.status(500).json(err);
+}
+});
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const itemData = await Item.destroy({
