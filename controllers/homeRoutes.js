@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const { Item, User } = require('../models');
 const withAuth = require('../utils/auth');
-const imagesData = require('../models/imagesData');
-const profileData = require('../models/profileData');
+// const imagesData = require('../models/imagesData');
+// const profileData = require('../models/profileData');
 
 router.get('/', async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
+    // Get all items and JOIN with user data
     const itemData = await Item.findAll({
       include: [
         {
@@ -16,13 +16,13 @@ router.get('/', async (req, res) => {
     });
 
     // Serialize data so the template can read it
-    const items = itemData.map((project) => project.get({ plain: true }));
+    const items = itemData.map((item) => item.get({ plain: true }));
 
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       items, 
-      imagesData,
-      profileData,
+      // imagesData,
+      // profileData,
       logged_in: req.session.logged_in 
     });
   } catch (err) {
@@ -56,6 +56,7 @@ router.get('/item/:id', async (req, res) => {
 });
 
 // Use withAuth middleware to prevent access to route
+// NEED PROFILE HANDLEBARS
 router.get('/profile', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
@@ -81,8 +82,9 @@ router.get('/login', (req, res) => {
     res.redirect('/profile');
     return;
   }
-
+  
   res.render('login');
+
 });
 
 router.get('/sign-up', async (req, res) => {
