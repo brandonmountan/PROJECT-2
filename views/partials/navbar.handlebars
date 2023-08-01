@@ -44,12 +44,12 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/item">Items</a></li>
-                {{#if loggedIn}}
+                {{#if logged_in}}
                 <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
                 <p class="nav-item">Welcome {{username}}</p>
                 {{else}}
-                <li class="nav-item"><a class="nav-link" href="/login">login</a></li>
-            </ul><a class="btn btn-primary ms-md-2" role="button" href="/sign-up">signup</a>
+                <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+            </ul><a class="btn btn-primary ms-md-2" role="button" href="/sign-up">Signup</a>
                 {{/if}}
         </div>
     </div>
