@@ -1,14 +1,29 @@
 const router = require('express').Router();
-const { Item, User } = require('../models');
-const withAuth = require('../utils/auth');
-const imagesData = require('../models/imagesData');
+const { Item, User } = require('../../models');
+const withAuth = require('../../utils/auth');
+const imagesData = require('../../models/imagesData');
 // const profileData = require('../models/profileData');
 
 router.get('/', async (req, res) => {
   try {
+    // Get all items and JOIN with user data
+    const itemData = await Item.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const items = itemData.map((item) => item.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
     res.render('homepage', { 
+      items, 
       imagesData,
       // profileData,
+      logged_in: req.session.logged_in 
     });
   } catch (err) {
     res.status(500).json(err);
@@ -73,7 +88,6 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/sign-up', async (req, res) => {
-  console.log("Rendering signup view");
   res.render('sign-up');
 });
 

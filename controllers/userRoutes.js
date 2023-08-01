@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
-const bcrypt = require('bcrypt');
+const { User } = require('../models');
 
 router.post('/', async (req, res) => {
   try {
@@ -10,7 +9,7 @@ router.post('/', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.status(200).json(userData);
+      res.render('profile');
     });
   } catch (err) {
     res.status(400).json(err);
@@ -41,8 +40,7 @@ router.post('/login', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
       
-      // res.json({ user: userData, message: 'You are now logged in!' });
-      res.redirect('/');
+      res.json({ user: userData, message: 'You are now logged in!' });
     });
 
   } catch (err) {
@@ -51,30 +49,18 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-  // Validation - make sure the required fields are present
-  if (!req.body.email || !req.body.password) {
-    return res.status(400).json({ message: 'Email and password are required' });
-  }
-
   try {
-    // Hash the password before saving it
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    await User.create({
+     await User.create({  
+      username: req.body.username, 
       email: req.body.email,
-      password: hashedPassword,
+      password: req.body.password,
     });
-
-    req.session.save(err => {
-      if (err) {
-        console.log(err);
-        return res.status(500).json(err);
-      }
-
+    
+    req.session.save(() => { 
       req.session.loggedIn = true;
-      req.session.email = req.body.email;
+      req.session.username = req.body.username;
 
-      res.redirect('/login');
+      res.redirect('/'); 
     });
   } catch (err) {
     console.log(err);
