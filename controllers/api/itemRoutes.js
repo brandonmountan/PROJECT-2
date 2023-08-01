@@ -1,9 +1,8 @@
-const router = require('express').Router();
+const router = require('express').Router;
 const { Item } = require('../../models');
 const withAuth = require('../../utils/auth');
 const upload = require('../../fileUpload');
 const multer = require('multer');
-
 
 router.post('/', withAuth, async (req, res) => {
   try {
