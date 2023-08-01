@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata and stylesheets here -->
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <ul>
+        {{#each items}}
+        <li>
+            <h3>{{item_name}}</h3>
+            <p>Description: {{description}}</p>
+            <p>Price: {{price}}</p>
+            <p>Posted by: {{User.email}}</p>
+        </li>
+        {{/each}}
+    </ul>
+</body>
+</html>
+  
