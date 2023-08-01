@@ -13915,6 +13915,15 @@ fieldset:disabled .btn {
     }
 
     .d-print-none {
-        display: none !important
+        display: none !important;
     }
+}
+.new-postContainer {
+  margin: 0 auto;
+  border-top: 5px solid #063341a4;
+}
+.new-postContainer form {
+    min-width: 900px !important;
+    margin: 0 auto;
+    padding: 0 20px;
 }
