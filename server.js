@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
 
 const session = require('express-session');
-// const routes = require('./controllers');
+const routes = require('./controllers');
 const handlebars = require('handlebars');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -40,9 +40,7 @@ app.use(express.urlencoded({ extended: true }));
 // Static route for serving the public directory
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-app.use(require('./controllers/homeRoutes.js'));
-app.use(require('./controllers/itemRoutes.js'));
-app.use(require('./controllers/userRoutes.js'));
+app.use(routes);
 
 
 sequelize.sync({ force: false }).then(() => {
