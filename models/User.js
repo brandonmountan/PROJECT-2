@@ -8,6 +8,7 @@ class User extends Model {
     }
   }
 
+  // Define columns for User model
 User.init(
     {
         id: {
