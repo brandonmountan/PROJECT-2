@@ -29,6 +29,10 @@ Item.init(
             isDecimal: true
             }
         },
+        image_url: {
+            type: DataTypes.STRING(512),
+            allowNull: true,
+          },
         start_date: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -54,4 +58,16 @@ Item.init(
     }
 );
 
+Item.search = async function(query) {
+    return this.findAll({
+      where: {
+        [Op.or]: [
+          { item_name: { [Op.like]: `%${query}%` } },
+          { description: { [Op.like]: `%${query}%` } }
+        ]
+      }
+    });
+  };
+  
+  
 module.exports = Item;

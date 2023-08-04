@@ -1,14 +1,15 @@
-const { Item } = require('../models');
+const {
+  Item
+} = require('../models');
 
-const itemData = [
-  {
+const itemData = [{
     item_name: 'Mountain Bike',
     description: 'A sturdy mountain bike suitable for all terrains',
     price: 199.99,
     start_date: '2023-08-01',
     end_date: '2023-08-31',
-    image_url: '../public/assets/items/pngwing.com (10)',
-    user_id: 1 
+    image_url: '/public/assets/items/pngwing.com (10).png',
+    user_id: 1
   },
   {
     item_name: 'Laptop',
@@ -16,8 +17,8 @@ const itemData = [
     price: 999.99,
     start_date: '2023-09-01',
     end_date: '2023-09-30',
-    image_url: '../public/assets/items/pngwing.com (10)',
-    user_id: 2 
+    image_url: '../public/assets/items/pngwing.com (10).png',
+    user_id: 2
   },
   {
     item_name: 'Smartphone',
@@ -26,7 +27,7 @@ const itemData = [
     start_date: '2023-10-01',
     end_date: '2023-10-31',
     image_url: '../public/assets/items/pngwing.com (10)',
-    user_id: 3 
+    user_id: 3
   },
   {
     item_name: 'Coffee Maker',
@@ -35,7 +36,7 @@ const itemData = [
     start_date: '2023-11-01',
     end_date: '2023-11-30',
     image_url: '../public/assets/items/pngwing.com (10)',
-    user_id: 4 
+    user_id: 4
   },
 ];
 

@@ -55,16 +55,15 @@ router.get('/search', async (req, res) => {
     // Search the items based on the query
     const itemData = await Item.findAll({
       where: {
-        name: {
+        item_name: {
           [require('sequelize').Op.like]: `%${query}%`
         }
       }
     });
-
     const items = itemData.map((item) => item.get({ plain: true }));
     res.render('search-results', { 
       items, 
-      logged_in: req.session.logged_in 
+      // logged_in: req.session.logged_in 
     });
   } catch (err) {
     res.status(500).json(err);
