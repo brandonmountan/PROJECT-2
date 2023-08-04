@@ -1,4 +1,6 @@
 
+
+
 Item.search = async function(query) {
   return this.findAll({
     where: {

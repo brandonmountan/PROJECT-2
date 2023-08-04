@@ -6,9 +6,24 @@ const imagesData = require('../models/imagesData');
 
 router.get('/', async (req, res) => {
   try {
+    // Get all items and JOIN with user data
+    const itemData = await Item.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const items = itemData.map((item) => item.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
     res.render('homepage', { 
+      items, 
       imagesData,
       // profileData,
+      logged_in: req.session.logged_in 
     });
   } catch (err) {
     res.status(500).json(err);
@@ -64,7 +79,7 @@ router.get('/profile', withAuth, async (req, res) => {
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect('/');
     return;
   }
   
@@ -73,7 +88,6 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/sign-up', async (req, res) => {
-  console.log("Rendering signup view");
   res.render('sign-up');
 });
 
