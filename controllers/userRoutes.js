@@ -51,14 +51,13 @@ router.post('/login', async (req, res) => {
 router.post('/signup', async (req, res) => {
   try {
      await User.create({  
-      username: req.body.username, 
       email: req.body.email,
       password: req.body.password,
     });
     
     req.session.save(() => { 
       req.session.loggedIn = true;
-      req.session.username = req.body.username;
+      req.session.email = req.body.email;
 
       res.redirect('/'); 
     });
