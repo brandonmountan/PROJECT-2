@@ -1,9 +1,12 @@
+// Import parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
+// Import our database connection from config.js
 const sequelize = require('../config/connection');
-// const { Item } = require('.');
 
+// Initialize Item model (table) by extending off sequelize's Model class
 class Item extends Model {}
 
+// Set up fields and define columns for Item model
 Item.init(
     {
         id: {

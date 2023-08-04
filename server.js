@@ -14,8 +14,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sess = {
-  secret: 'Super secret secret',
-  cookie: {},
+  secret: process.env.SECRET,
+  cookie: {
+    maxAge: 300000,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -41,7 +46,10 @@ app.use(express.urlencoded({ extended: true }));
 // Static route for serving the public directory
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-app.use(routes);
+app.use(require('./controllers/homeRoutes.js'));
+app.use(require('./controllers/itemRoutes.js'));
+app.use(require('./controllers/userRoutes.js'));
+// app.use(routes);
 
 
 sequelize.sync({ force: false }).then(() => {

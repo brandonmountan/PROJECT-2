@@ -1,26 +1,27 @@
-# rentopia
+# rentopia - Local Marketplace for Renting, Buying, and Selling Products
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+Rentopia is a marketplace platform designed to facilitate local renting, buying, and selling of various products. It aims to connect individuals within a local community, making it easy and convenient to find and offer products for temporary use or purchase.
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+## Features
 
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
+- User Profiles: Create your own user profile and manage your listings.
+- Product Listings: List products you want to rent, buy, or sell with detailed descriptions and images.
+- Search and Filters: Easily find products using search keywords and apply filters based on category, location, and price range.
+- Communication: Communicate with other users through an integrated messaging system.
+- Secure Transactions: Rentopia ensures secure transactions and provides payment integration for buying and renting products.
+- Local Community: Connect with people in your local area, fostering a sense of community and trust.
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+Node.js V16 or higher is required.
+1. Clone the repository: `git clone https://github.com/brandonmountan/rentopia`
+2. Navigate to the project directory
+3. Install dependencies: `npm install`
+4. Configure the environment variables (create an `.env` file).
+5. Start the server: `npm start`
+6. Access Rentopia in your browser at http://localhost:3001
 
 ## Usage
 
@@ -34,12 +35,16 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
+This app was made by:
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+- [Brandon Mountan](https://github.com/brandonmountan)
 
-If you followed tutorials, include links to those here as well.
+- [Solomon Tegegne](https://github.com/solowon27)
+
+- [Suzy Han](https://github.com/suzyhan)
+
+- [Jordan Peshev](https://github.com/Peshey)
 
 ## License
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+None
