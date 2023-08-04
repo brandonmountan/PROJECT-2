@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
 
 const session = require('express-session');
-const routes = require('./controllers');
+// const routes = require('./controllers');
 const handlebars = require('handlebars');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -14,7 +14,12 @@ const PORT = process.env.PORT || 3001;
 
 const sess = {
   secret: process.env.SECRET,
-  cookie: {},
+  cookie: {
+    maxAge: 300000,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -40,7 +45,9 @@ app.use(express.urlencoded({ extended: true }));
 // Static route for serving the public directory
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-app.use(routes);
+app.use(require('./controllers/homeRoutes'));
+app.use(require('./controllers/itemRoutes'));
+app.use(require('./controllers/userRoutes'));
 
 
 sequelize.sync({ force: false }).then(() => {
