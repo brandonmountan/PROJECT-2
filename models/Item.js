@@ -54,4 +54,16 @@ Item.init(
     }
 );
 
+Item.search = async function(query) {
+    return this.findAll({
+      where: {
+        [Op.or]: [
+          { item_name: { [Op.like]: `%${query}%` } },
+          { description: { [Op.like]: `%${query}%` } }
+        ]
+      }
+    });
+  };
+  
+  
 module.exports = Item;
