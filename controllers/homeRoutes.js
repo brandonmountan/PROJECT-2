@@ -31,7 +31,28 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/item', async (req, res) => {
-  res.render('item');
+  try {
+    // Get all items and JOIN with user data
+    const itemData = await Item.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const items = itemData.map((item) => item.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('item', { 
+      items, 
+      imagesData,
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.get('/item/:id', async (req, res) => {

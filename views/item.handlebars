@@ -34,13 +34,32 @@
                 <li class="nav-item"><a class="nav-link" href="/search-results">Search-results</a></li>
             </ul>
         </div>
-       <div data-reflow-type="product-list" data-reflow-order="date_desc">
-        <div class="reflow-product-list">
-            <div class="ref-products"></div>
-            <div class="ref-product-review"></div>
-        </div>
-    </div>
-    <div data-reflow-type="product-list" data-reflow-order="date_desc"></div>
+     <h1>Items List</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Item Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Posted by</th>
+                <th>Add to cart</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each items}}
+                <tr>
+                <td><img src="{{image_url}}" alt="{{item_name}}"></td>
+                <td>{{item_name}}</td>
+                <td>{{description}}</td>
+                <td>{{price}}</td>
+                <td><a href="/user/{{user_id}}">{{user_id}}</a></td>
+                </tr>
+
+            {{/each}}
+        </tbody>
+    </table>
     <script src="../public/product/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>
     <script src="../public/product/assets/js/bs-init.js"></script>

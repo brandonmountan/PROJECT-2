@@ -29,6 +29,10 @@ Item.init(
             isDecimal: true
             }
         },
+        image_url: {
+            type: DataTypes.STRING(512),
+            allowNull: true,
+          },
         start_date: {
             type: DataTypes.DATE,
             allowNull: false,
