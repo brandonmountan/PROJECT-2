@@ -18,47 +18,39 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/api/users/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
 
     if (!userData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
+      return res.status(400).json({ message: 'Incorrect email or password, please try again' });
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = await bcrypt.compare(req.body.password, userData.password);
 
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
+      return res.status(400).json({ message: 'Incorrect email or password, please try again' });
     }
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-      
-      // res.json({ user: userData, message: 'You are now logged in!' });
+      req.session.loggedIn = true;
+      req.session.email = req.body.email;
+
       res.redirect('/');
     });
-
   } catch (err) {
-    res.status(400).json(err);
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
+
 router.post('/signup', async (req, res) => {
-  // Validation - make sure the required fields are present
   if (!req.body.email || !req.body.password) {
     return res.status(400).json({ message: 'Email and password are required' });
   }
 
   try {
-    // Hash the password before saving it
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     await User.create({
@@ -75,7 +67,7 @@ router.post('/signup', async (req, res) => {
       req.session.loggedIn = true;
       req.session.email = req.body.email;
 
-      res.redirect('/login');
+      res.redirect('/profile');
     });
   } catch (err) {
     console.log(err);
