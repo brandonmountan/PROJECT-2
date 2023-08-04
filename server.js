@@ -45,9 +45,10 @@ app.use(express.urlencoded({ extended: true }));
 // Static route for serving the public directory
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-app.use(require('./controllers/homeRoutes'));
-app.use(require('./controllers/itemRoutes'));
-app.use(require('./controllers/userRoutes'));
+app.use(require('./controllers/homeRoutes.js'));
+app.use(require('./controllers/itemRoutes.js'));
+app.use(require('./controllers/userRoutes.js'));
+// app.use(routes);
 
 
 sequelize.sync({ force: false }).then(() => {
