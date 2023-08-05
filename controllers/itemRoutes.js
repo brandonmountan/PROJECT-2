@@ -1,22 +1,22 @@
 const router = require('express').Router();
-const { Item } = require('../models');
+const { Item, Cart, User } = require('../models');
 const withAuth = require('../utils/auth');
 const multer = require('multer');
 
 const path = require('path');
 
-router.post('/', withAuth, async (req, res) => {
-  try {
-    const newItem = await Item.create({
-      ...req.body,
-      user_id: req.session.user_id,
-    });
+// router.post('/', withAuth, async (req, res) => {
+//   try {
+//     const newItem = await Item.create({
+//       ...req.body,
+//       user_id: req.session.user_id,
+//     });
 
-    res.status(200).json(newItem);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+//     res.status(200).json(newItem);
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
 
 router.get('/post-item', withAuth, (req, res) => {
   res.render('post-item');
@@ -74,22 +74,132 @@ router.get('/search', async (req, res) => {
   }
 });
 
-
-router.delete('/:id', withAuth, async (req, res) => {
+router.get('/cart', withAuth, async (req, res) => {
   try {
-    const itemData = await Item.destroy({
+    const { user_id } = req.session;
+
+    // Find all cart items associated with the current user
+    const cartItems = await Cart.findAll({
       where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
+        user_id,
+      },
+      include: [
+        {
+          model: Item,
+          attributes: ['id', 'item_name', 'description', 'price', 'image_url'],
+        },
+      ],
+    });
+
+    // Pass the cart items to the view for rendering
+    res.render('cart', { cartItems });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+router.post('/add-to-cart/:item_id', withAuth, async (req, res) => {
+  try {
+    const { item_id } = req.params;
+    const { user_id } = req.session;
+
+    // Check if the item is already in the cart
+    const existingCartItem = await Cart.findOne({
+      where: {
+        item_id,
+        user_id,
       },
     });
 
-    if (!itemData) {
-      res.status(404).json({ message: 'No item found with this id!' });
+    if (existingCartItem) {
+      // If the item is already in the cart, update its quantity
+      existingCartItem.quantity += 1;
+      await existingCartItem.save();
+    } else {
+      // If the item is not in the cart, create a new cart item
+      await Cart.create({
+        item_id,
+        user_id,
+      });
+    }
+
+    res.redirect('/cart');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/edit-item/:id', withAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const item = await Item.findByPk(id);
+
+    if (!item) {
+      res.status(404).json({ message: 'Item not found' });
       return;
     }
 
-    res.status(200).json(itemData);
+    if (item.user_id !== req.session.user_id) {
+      res.status(403).json({ message: 'You are not authorized to edit this item' });
+      return;
+    }
+
+    res.render('edit-item', { item });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post('/edit-item/:id', withAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { item_name, description, price } = req.body;
+
+    const itemData = await Item.findByPk(id);
+
+    if (!itemData) {
+      res.status(404).json({ message: 'Item not found' });
+      return;
+    }
+
+    // Ensure that only the owner can edit the item
+    if (itemData.user_id !== req.session.user_id) {
+      res.status(403).json({ message: 'You are not authorized to edit this item' });
+      return;
+    }
+
+    // Update the item
+    await itemData.update({ item_name, description, price });
+
+    res.redirect('/dashboard');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.delete('/delete-item/:id', withAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const itemData = await Item.findByPk(id);
+
+    if (!itemData) {
+      res.status(404).json({ message: 'Item not found' });
+      return;
+    }
+
+    // Ensure that only the owner can delete the item
+    if (itemData.user_id !== req.session.user_id) {
+      res.status(403).json({ message: 'You are not authorized to delete this item' });
+      return;
+    }
+
+    // Delete the item
+    await itemData.destroy();
+
+    res.redirect('/dashboard');
   } catch (err) {
     res.status(500).json(err);
   }
