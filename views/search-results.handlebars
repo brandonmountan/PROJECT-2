@@ -4,9 +4,10 @@
         {{#each items}}
         <li>
             <h3>{{item_name}}</h3>
+            <img src="{{image_url}}" alt="{{item_name}}" width = '200'>
             <p>Description: {{description}}</p>
             <p>Price: {{price}}</p>
-            <p>Posted by: {{User.email}}</p>
+            <a href="/user/{{user.first_name}}">{{user.first_name}}</a>
         </li>
         {{/each}}
     </ul>
