@@ -47,8 +47,6 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(require('./controllers/homeRoutes.js'));
 app.use(require('./controllers/itemRoutes.js'));
 app.use(require('./controllers/userRoutes.js'));
-// app.use(routes);
-
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
