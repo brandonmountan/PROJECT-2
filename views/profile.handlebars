@@ -2,100 +2,23 @@
     <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-lg-5 col-xl-4">
             <div>
-                <form class="p-3 p-xl-4" action="/upload-item" method="post" enctype="multipart/form-data">
-                    {{#if items.length}}
-                    <ul>
-                        {{#each items}}
-                        <li>
-                            <h2>{{item_name}}</h2>
-                            <p>{{description}}</p>
-                            <button type="button" class="btn btn-sm btn-danger delete-item-btn" data-id="{{item.id}}">Delete</button>
-                            <!-- Display other item details -->
-                            <img src="/uploads/{{image}}" alt="Item Image" width="200">
-                        </li>
-                        {{/each}}
-                    </ul>
-                    {{else}}
-                    <p>No items found.</p>
-                    {{/if}}
-                    <h2>New posting</h2>
-                    <div class="new-postContainer">
-                        <div class="mb-3">
-                            <label>Add photos:</label>
-                            <input class="form-control" type="file" name="photos" accept="image/*" multiple required>
-                            <p>Please upload at least one image</p>
-                            <p>Click to reorder, crop, or add photos</p>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="posting-title">Posting title:</label>
-                            <input class="form-control" type="text" id="posting-title" name="posting_title" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="title-max-length">Title 40 char max:</label>
-                            <input class="form-control" type="text" id="title-max-length" name="title_max_length"
-                                maxlength="40" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="category">Category:</label>
-                            <input class="form-control" type="text" id="category" name="category" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="description">Description:</label>
-                            <textarea class="form-control" id="description" name="description" rows="4"
-                                required></textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="zipcode">Zipcode:</label>
-                            <input class="form-control" type="text" id="zipcode" name="zipcode" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="current-location-flag">Current location country</label>
-                            <select class="form-control" id="current-location-flag" name="current_location_flag"
-                                required>
-                                <option value="US">United States</option>
-                                <option value="CA">Canada</option>
-                                <option value="UK">United Kingdom</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label>Rental price ($) per:</label>
-                            <select class="form-control" name="rental_price_period" required>
-                                <option value="Day">Day</option>
-                                <option value="Week">Week</option>
-                                <option value="Month">Month</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="item-value">Item value ($):</label>
-                            <input class="form-control" type="number" id="item-value" name="item_value" step="0.01"
-                                required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label>Quantity lightbulb:</label>
-                            <input class="form-control" type="number" name="quantity_lightbulb" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label>Minimum rental days:</label>
-                            <input class="form-control" type="number" name="minimum_rental_days" required>
-                        </div>
-
-                        <div>
-                            <button class="btn btn-primary d-block w-100" type="submit">Submit</button>
-                        </div>
-                </form>
-
+                {{#if items.length}}
+                <ul>
+                    {{#each items}}
+                    <li>
+                        <h2>{{item_name}}</h2>
+                        <p>{{description}}</p>
+                        <p>Price: ${{price}}</p>
+                        <img src="{{image_url}}" alt="{{item_name}}" width = '100'>.
+                        <a href="/edit-item/{{id}}">Edit</a>
+                        <a href="/delete-item/{{id}}">Delete</a>
+                    </li>
+                    {{/each}}
+                </ul>
+                {{else}}
+                <p>No items found.</p>
+                {{/if}}
             </div>
         </div>
     </div>
-</div>
 </div>

@@ -47,12 +47,14 @@ router.post('/login', async (req, res) => {
 router.post('/signup', async (req, res) => {
   try {
      await User.create({  
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
     });
     
     req.session.save(() => { 
-      req.session.loggedIn = true;
+      req.session.logged_in = true;
       req.session.email = req.body.email;
 
       res.redirect('/'); 

@@ -1,0 +1,12 @@
+<ul>
+{{#each cartItems}}
+  <li>
+    <img src="{{item.image_url}}" alt="{{item.item_name}}" width="100">
+    <h2>{{item.item_name}}</h2>
+    <p>{{item.description}}</p>
+    <p>Price: ${{item.price}}</p>
+    <p>Quantity: {{quantity}}</p>
+    <a href="/remove-from-cart/{{item.id}}">Remove from cart</a>
+  </li>
+{{/each}}
+</ul>
