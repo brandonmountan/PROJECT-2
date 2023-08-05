@@ -41,19 +41,20 @@
                             <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
                         </svg>Auto</a></div>
             </div>
-           <ul class="navbar-nav ms-auto">
+<ul class="navbar-nav ms-auto">
   <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
   <li class="nav-item"><a class="nav-link" href="/item">Items</a></li>
-<li class="nav-item"><a class="nav-link" href="/profile">Dashboard</a></li>
+  <li class="nav-item"><a class="nav-link" href="/profile">dashboard</a></li>
 
   {{#if logged_in}}
-    <button class="nav-item nav-link" id="logout">Logout</button>
+    <li class="nav-item nav-link" id="logout"><a class="nav-link" href="#">Logout</a></li>
     <li class="nav-item">Welcome <code>{{email}}</code></li>
   {{else}}
     <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
     <a class="btn btn-primary ms-md-2" role="button" href="/sign-up">Signup</a>
   {{/if}}
 </ul>
+
         </div>
     </div>
 </nav>
