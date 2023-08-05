@@ -44,9 +44,9 @@ After logging in, navigate to your profile dashboard by clicking on dashboard in
 In your dashboard, you'll find options to add/manage listings. Fill in the details of your listing, including product name, category, description, price, and upload high-quality images. Once you've provided all necessary information, click the "Submit" button to publish your listing.
 
 ## Screenshots
-    ![homepage](./public/assets/screenshots/homepage.png) 
-    ![signup page](./public/assets/screenshots/signup.png)
-    ![posting page](/public/assets/screenshots/posting.png)
+![homepage](/public/assets/screenshots/homepage.png) 
+![signup page](/public/assets/screenshots/signup.png)
+![posting page](/public/assets/screenshots/posting.png)
 
 ## Credits
 
