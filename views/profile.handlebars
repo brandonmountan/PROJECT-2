@@ -8,8 +8,10 @@
                     <li>
                         <h2>{{item_name}}</h2>
                         <p>{{description}}</p>
-                        <!-- Display other item details -->
-                        <img src="/uploads/{{image}}" alt="Item Image" width="200">
+                        <p>Price: ${{price}}</p>
+                        <img src="{{image_url}}" alt="{{item_name}}" width = '100'>.
+                        <a href="/edit-item/{{id}}">Edit</a>
+                        <a href="/delete-item/{{id}}">Delete</a>
                     </li>
                     {{/each}}
                 </ul>
