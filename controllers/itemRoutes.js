@@ -18,7 +18,7 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/post-item', (req, res) => {
+router.get('/post-item', withAuth, (req, res) => {
   res.render('post-item');
 });
 
