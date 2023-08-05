@@ -1,51 +1,55 @@
 const router = require('express').Router();
-const { Item } = require('../models');
+const { Item, Cart, User } = require('../models');
 const withAuth = require('../utils/auth');
-const upload = require('../fileUpload');
 const multer = require('multer');
 
-router.post('/', withAuth, async (req, res) => {
-  try {
-    const newItem = await Item.create({
-      ...req.body,
-      user_id: req.session.user_id,
-    });
+const path = require('path');
 
-    res.status(200).json(newItem);
-  } catch (err) {
-    res.status(400).json(err);
+// router.post('/', withAuth, async (req, res) => {
+//   try {
+//     const newItem = await Item.create({
+//       ...req.body,
+//       user_id: req.session.user_id,
+//     });
+
+//     res.status(200).json(newItem);
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
+
+router.get('/post-item', withAuth, (req, res) => {
+  res.render('post-item');
+});
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    // Create an absolute path to the upload directory
+    const uploadPath = path.join(__dirname, '../public/assets/items');
+    cb(null, uploadPath);
+  },
+  filename: function (req, file, cb) {
+    // Generate a unique filename for each uploaded file
+    cb(null, Date.now() + path.extname(file.originalname));
   }
 });
-router.post('/upload-item', upload.single('image'), (req, res) => {
-  // Access form data using req.body
-  const item_name = req.body.item_name;
-  const description = req.body.description;
-  const price = req.body.price;
-  const posting_title = req.body.posting_title;
-  const title_max_length = req.body.title_max_length;
-  const category = req.body.category;
-  const zipcode = req.body.zipcode;
-  const current_location = req.body.current_location;
-  const rental_price_period = req.body.rental_price_period;
-  const item_value = req.body.item_value;
-  const quantity_lightbulb = req.body.quantity_lightbulb;
-  const minimum_rental_days = req.body.minimum_rental_days;
 
-  // Access the uploaded file using req.file
-  const image = req.file;
+const upload = multer({ storage });
 
-  items.push({
-    item_name,
-    description,
-    price,
-    posting_title,
-    image,
-  });
+// POST Route to handle form submission
+router.post('/upload-item', upload.single('image'), async (req, res) => {
+  const { item_name, description, price, start_date, end_date } = req.body; // Include start_date and end_date
+  const image_url = '/public/assets/items/' + req.file.filename;
 
-  res.redirect('/');
-  res.send('Form submitted and file uploaded successfully!');
-
+  try {
+    await Item.create({ item_name, description, price, start_date, end_date, image_url, user_id: req.session.user_id }); // Include start_date and end_date
+    res.redirect('/profile');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
 });
+
 
 router.get('/search', async (req, res) => {
   try {
@@ -70,22 +74,132 @@ router.get('/search', async (req, res) => {
   }
 });
 
-
-router.delete('/:id', withAuth, async (req, res) => {
+router.get('/cart', withAuth, async (req, res) => {
   try {
-    const itemData = await Item.destroy({
+    const { user_id } = req.session;
+
+    // Find all cart items associated with the current user
+    const cartItems = await Cart.findAll({
       where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
+        user_id,
+      },
+      include: [
+        {
+          model: Item,
+          attributes: ['id', 'item_name', 'description', 'price', 'image_url'],
+        },
+      ],
+    });
+
+    // Pass the cart items to the view for rendering
+    res.render('cart', { cartItems });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+router.post('/add-to-cart/:item_id', withAuth, async (req, res) => {
+  try {
+    const { item_id } = req.params;
+    const { user_id } = req.session;
+
+    // Check if the item is already in the cart
+    const existingCartItem = await Cart.findOne({
+      where: {
+        item_id,
+        user_id,
       },
     });
 
-    if (!itemData) {
-      res.status(404).json({ message: 'No item found with this id!' });
+    if (existingCartItem) {
+      // If the item is already in the cart, update its quantity
+      existingCartItem.quantity += 1;
+      await existingCartItem.save();
+    } else {
+      // If the item is not in the cart, create a new cart item
+      await Cart.create({
+        item_id,
+        user_id,
+      });
+    }
+
+    res.redirect('/cart');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/edit-item/:id', withAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const item = await Item.findByPk(id);
+
+    if (!item) {
+      res.status(404).json({ message: 'Item not found' });
       return;
     }
 
-    res.status(200).json(itemData);
+    if (item.user_id !== req.session.user_id) {
+      res.status(403).json({ message: 'You are not authorized to edit this item' });
+      return;
+    }
+
+    res.render('edit-item', { item });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post('/edit-item/:id', withAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { item_name, description, price } = req.body;
+
+    const itemData = await Item.findByPk(id);
+
+    if (!itemData) {
+      res.status(404).json({ message: 'Item not found' });
+      return;
+    }
+
+    // Ensure that only the owner can edit the item
+    if (itemData.user_id !== req.session.user_id) {
+      res.status(403).json({ message: 'You are not authorized to edit this item' });
+      return;
+    }
+
+    // Update the item
+    await itemData.update({ item_name, description, price });
+
+    res.redirect('/dashboard');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.delete('/delete-item/:id', withAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const itemData = await Item.findByPk(id);
+
+    if (!itemData) {
+      res.status(404).json({ message: 'Item not found' });
+      return;
+    }
+
+    // Ensure that only the owner can delete the item
+    if (itemData.user_id !== req.session.user_id) {
+      res.status(403).json({ message: 'You are not authorized to delete this item' });
+      return;
+    }
+
+    // Delete the item
+    await itemData.destroy();
+
+    res.redirect('/dashboard');
   } catch (err) {
     res.status(500).json(err);
   }
