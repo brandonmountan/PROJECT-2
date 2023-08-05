@@ -70,6 +70,21 @@ router.get('/search', async (req, res) => {
   }
 });
 
+// Find one item by its id
+router.get('/:id', async (req, res) => {
+  try {
+    const itemData = await Item.findByPk(req.params.id);
+
+    if (!itemData) {
+      res.status(404).json({ message: 'No item found!' });
+      return;
+    }
+
+    res.status(200).json(itemData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.delete('/:id', withAuth, async (req, res) => {
   try {
