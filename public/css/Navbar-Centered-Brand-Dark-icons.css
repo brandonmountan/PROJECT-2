@@ -54,4 +54,12 @@
 .bs-icon.bs-icon-circle {
   border-radius: 50%;
 }
+#cart-pic {
+  margin-right: 10px;
+  vertical-align: middle;
+  transition: transform 0.2s ease-in-out; /* Add a transition for smooth animation */
+}
 
+#cart-pic:hover {
+  transform: scale(1.4); /* Add a hover effect to scale the navbar links a little */
+}
