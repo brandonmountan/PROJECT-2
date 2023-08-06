@@ -19,6 +19,7 @@
                         <input type="text" class="form-control" name="query" placeholder="Search for items..." required>
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary">Search</button>
+                            <a href="/post-item" class="btn btn-primary">or Post here</a>
                         </div>
                     </div>
                 </form>
@@ -30,8 +31,6 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item"><a class="nav-link active" href="#">rent</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">buy</a></li>
-                <li class="nav-item"><a class="nav-link" href="/search-results">Search-results</a></li>
             </ul>
         </div>
      <h1>Items List</h1>
@@ -50,11 +49,16 @@
         <tbody>
             {{#each items}}
                 <tr>
-                <td><img src="{{image_url}}" alt="{{item_name}}"></td>
+                <td><img src="{{image_url}}" alt="{{item_name}}" width = '100'></td>
                 <td>{{item_name}}</td>
                 <td>{{description}}</td>
                 <td>{{price}}</td>
-                <td><a href="/user/{{user_id}}">{{user_id}}</a></td>
+                <td><a href="/user/{{user.first_name}}">{{user.first_name}}</a></td>
+                <td>
+          <form action="/add-to-cart/{{id}}" method="POST">
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+          </form>
+        </td>
                 </tr>
 
             {{/each}}

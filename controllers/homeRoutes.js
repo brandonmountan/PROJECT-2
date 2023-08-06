@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Item, User } = require('../models');
 const withAuth = require('../utils/auth');
 const imagesData = require('../models/imagesData');
+const { getGreeting } = require('../public/js/helpers');
 // const profileData = require('../models/profileData');
 
 router.get('/', async (req, res) => {
@@ -18,11 +19,15 @@ router.get('/', async (req, res) => {
     // Serialize data so the template can read it
     const items = itemData.map((item) => item.get({ plain: true }));
 
+    const user =req.session.user_id;
+
+    const greeting = getGreeting();
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       items, 
       imagesData,
-      // profileData,
+      user,
+      greeting,
       logged_in: req.session.logged_in 
     });
   } catch (err) {
@@ -111,5 +116,17 @@ router.get('/login', (req, res) => {
 router.get('/sign-up', async (req, res) => {
   res.render('sign-up');
 });
+
+
+// router.post('/logout', (req, res) => {
+//   if (req.session.logged_in) {
+//     req.session.destroy(() => {
+//       res.status(204).end();
+//     });
+//   } else {
+//     res.status(404).end();
+//   }
+// });
+
 
 module.exports = router;
