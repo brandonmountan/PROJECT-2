@@ -47,8 +47,9 @@
   <li class="nav-item"><a class="nav-link" href="/profile">Dashboard</a></li>
 
   {{#if logged_in}}
-    <li class="nav-item nav-link" id="logout"><a class="nav-link" href="#">Logout</a></li>
-    <li class="nav-item">{{greeting}} <code>{{this.first_name}}!</code></li>
+    <li class="nav-item" id="logout"><a class="nav-link" href="#">Logout</a></li>
+    <li class="nav-item">Welcome <code>{{email}}</code></li>
+
   {{else}}
     <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
     <a class="btn btn-primary ms-md-2" role="button" href="/sign-up">Signup</a>
