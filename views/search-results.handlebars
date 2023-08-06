@@ -8,6 +8,9 @@
             <p>Description: {{description}}</p>
             <p>Price: {{price}}</p>
             <a href="/user/{{user.first_name}}">{{user.first_name}}</a>
+            <form action="/add-to-cart/{{id}}" method="POST">
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+          </form>
         </li>
         {{/each}}
     </ul>
