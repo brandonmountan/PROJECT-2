@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch item details from the backend using Fetch API
     function fetchItemDetails() {
       // Replace '/api/items' with the actual API endpoint for retrieving item details
-      return fetch('/api/items')
+      return fetch('/items')
         .then(response => response.json())
         .catch(error => {
           console.error('Error fetching item details:', error);
