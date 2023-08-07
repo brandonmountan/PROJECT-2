@@ -12,8 +12,10 @@ const methodOverride = require('method-override');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+require('dotenv').config();
+
 const sess = {
-  secret: process.env.SECRET,
+  secret: 'process.env.SECRET',
   cookie: {
     maxAge: 3600000, //set to 1 hour
     httpOnly: true,
@@ -28,11 +30,12 @@ const sess = {
 };
 
 app.use(session(sess));
+// app.use(express.session());
 
 const hbs = exphbs.create({helpers});
 
-
 app.use(methodOverride('_method'));
+
 // Custom handlebars helpers
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
