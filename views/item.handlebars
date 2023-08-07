@@ -54,10 +54,10 @@
                 <td>{{item_name}}</td>
                 <td>{{description}}</td>
                 <td>{{price}}</td>
-                <td>{{user.first_name}}</td>
+                <td id = "first_name">{{user.first_name}}</td>
                 <td>
-       <form id="addToCartForm" action="/add-to-cart/{{id}}" method="POST">
-  <button type="submit" class="btn btn-primary addToCartButton" data-item-id="{{id}}">Add to Cart</button>
+      <form id="addToCartForm" action="/add-to-cart/{{id}}" method="POST">
+    <button type="submit" class="btn btn-primary addToCartButton" data-item-id="{{id}}" onclick="changeColor(event, this)">Add to Cart</button>
 </form>
         </td>
                 </tr>
