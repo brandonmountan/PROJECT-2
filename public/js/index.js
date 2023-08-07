@@ -31,6 +31,21 @@ function deleteItem(itemId) {
       });
   }
 
+  const delButtonHandler = async (event) => {
+    if (event.target.hasAttribute('data-id')) {
+      const id = event.target.getAttribute('data-id');
+  
+      const response = await fetch(`/delete-item/${id}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.ok) {
+        document.location.replace('/profile');
+      } else {
+        alert('Failed to delete item');
+      }
+    }
+  };
 // Function to handle removing an item from the cart
 async function removeFromCart(cartId) {
   try {
@@ -46,9 +61,9 @@ async function removeFromCart(cartId) {
     console.error(error);
   }
 }
-const cartItems = [];
+// const cartItems = [];
 
-    const items = {{items}};
-    items.forEach(item => {
-        item.isInCart = cartItems.some(cartItem => cartItem.id === item.id);
-    });
+//     const items = {{items}};
+//     items.forEach(item => {
+//         item.isInCart = cartItems.some(cartItem => cartItem.id === item.id);
+//     });
