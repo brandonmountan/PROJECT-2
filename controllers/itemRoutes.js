@@ -165,7 +165,7 @@ router.get('/edit-item/:id', withAuth, async (req, res) => {
 router.put('/edit-item/:id', withAuth, async (req, res) => {
   try {
     const { id } = req.params;
-    const { item_name, description, price } = req.body;
+    const { item_name, description, price, image_url } = req.body;
 
     const itemData = await Item.findByPk(id);
 
@@ -181,9 +181,9 @@ router.put('/edit-item/:id', withAuth, async (req, res) => {
     }
 
     // Update the item
-    await itemData.update({ item_name, description, price });
+    await itemData.update({ item_name, description, price, image_url });
 
-    res.redirect('/dashboard');
+    res.redirect('/profile');
   } catch (err) {
     res.status(500).json(err);
   }
