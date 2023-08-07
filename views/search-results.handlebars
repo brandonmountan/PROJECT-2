@@ -1,17 +1,22 @@
-
-    <h1>Search Results</h1>
+<h1>Search Results</h1>
+{{#if items.length}}
     <ul>
         {{#each items}}
-        <li>
-            <h3>{{item_name}}</h3>
-            <img src="{{image_url}}" alt="{{item_name}}" width = '200'>
-            <p>Description: {{description}}</p>
-            <p>Price: {{price}}</p>
-            <a href="/user/{{user.first_name}}">{{user.first_name}}</a>
-            <form action="/add-to-cart/{{id}}" method="POST">
-            <button type="submit" class="btn btn-primary">Add to Cart</button>
-          </form>
-        </li>
+            <li>
+                <h3>{{item_name}}</h3>
+                <img src="{{image_url}}" alt="{{item_name}}" width="200">
+                <p>Description: {{description}}</p>
+                <p>Price: {{price}}</p>
+                <a href="/user/{{user.first_name}}">{{user.first_name}}</a>
+                <form action="/add-to-cart/{{id}}" method="POST">
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            </li>
         {{/each}}
     </ul>
+{{else}}
+<div class="danger-message">
+    <p id="'danger">No items found.</p>
+    </div>
+{{/if}}
 <script src="../public/js/index.js"></script>
