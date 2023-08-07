@@ -11,8 +11,10 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+require('dotenv').config();
+
 const sess = {
-  secret: 'super secret secret',
+  secret: process.env.SECRET,
   cookie: {
     maxAge: 3600000, //set to 1 hour
     httpOnly: true,
