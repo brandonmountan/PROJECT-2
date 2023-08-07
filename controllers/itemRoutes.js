@@ -79,7 +79,7 @@ router.get('/cart', withAuth, async (req, res) => {
     });
 
     // Pass the cart items to the view for rendering
-    res.render('cart', { cartItems });
+    res.render('cart', { cartItems: cartItems.map(item => item.get({ plain: true })) });
   } catch (err) {
     res.status(500).json(err);
   }
