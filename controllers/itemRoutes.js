@@ -118,6 +118,7 @@ router.post('/add-to-cart/:item_id', withAuth, async (req, res) => {
       existingCartItem.quantity += 1;
       await existingCartItem.save();
     } else {
+      
       // If the item is not in the cart, create a new cart item
       await Cart.create({
         item_id,
@@ -131,26 +132,32 @@ router.post('/add-to-cart/:item_id', withAuth, async (req, res) => {
   }
 });
 
-router.get('/edit-item/:id', withAuth, async (req, res) => {
+router.delete('/remove-from-cart/:id', withAuth, async (req, res) => {
   try {
     const { id } = req.params;
-    const item = await Item.findByPk(id);
+    
+    // Check if the cart item exists for the current user
+    const cartItem = await Cart.findOne({
+      where: {
+       id,
+        user_id: req.session.user_id,
+      },
+    });
 
-    if (!item) {
-      res.status(404).json({ message: 'Item not found' });
-      return;
+    if (!cartItem) {
+      return res.status(404).json({ message: 'Item not found in the cart' });
     }
 
-    if (item.user_id !== req.session.user_id) {
-      res.status(403).json({ message: 'You are not authorized to edit this item' });
-      return;
-    }
+    // Remove the item from the cart
+    await cartItem.destroy();
 
-    res.render('edit-item', { item });
+    res.sendStatus(200);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+
 
 router.post('/edit-item/:id', withAuth, async (req, res) => {
   try {
