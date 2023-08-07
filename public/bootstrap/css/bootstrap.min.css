@@ -2445,7 +2445,10 @@ progress {
     font-size: .875em;
     color: var(--bs-secondary-color)
 }
-
+#first_name{
+    color: rgb(43, 85, 223);
+    text-decoration: underline;
+}
 .form-control {
     display: block;
     width: 100%;
