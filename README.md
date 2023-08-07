@@ -46,7 +46,14 @@ In your dashboard, you'll find options to add/manage listings. Fill in the detai
 ## Screenshots
 ![homepage](/public/assets/screenshots/homepage.png) 
 ![signup page](/public/assets/screenshots/signup.png)
+![login page](/public/assets/screenshots/login.png)
 ![posting page](/public/assets/screenshots/posting.png)
+![cart page](/public/assets/screenshots/cart.jpg)
+![dashboard page](/public/assets/screenshots/dashboard.jpg)
+![items page](/public/assets/screenshots/items.jpg)
+![mobile view 1](/public/assets/screenshots/mobile%20views%20sample%20with%20humburger%20menu.png)
+![mobile view 2](/public/assets/screenshots/mobileview%202.png)
+
 
 ## Credits
 
