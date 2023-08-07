@@ -5,19 +5,6 @@ const multer = require('multer');
 
 const path = require('path');
 
-// router.post('/', withAuth, async (req, res) => {
-//   try {
-//     const newItem = await Item.create({
-//       ...req.body,
-//       user_id: req.session.user_id,
-//     });
-
-//     res.status(200).json(newItem);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
-
 router.get('/post-item', withAuth, (req, res) => {
   res.render('post-item');
 });
@@ -99,7 +86,6 @@ router.get('/cart', withAuth, async (req, res) => {
 });
 
 
-
 router.post('/add-to-cart/:item_id', withAuth, async (req, res) => {
   try {
     const { item_id } = req.params;
@@ -118,7 +104,6 @@ router.post('/add-to-cart/:item_id', withAuth, async (req, res) => {
       existingCartItem.quantity += 1;
       await existingCartItem.save();
     } else {
-      
       // If the item is not in the cart, create a new cart item
       await Cart.create({
         item_id,
@@ -126,11 +111,13 @@ router.post('/add-to-cart/:item_id', withAuth, async (req, res) => {
       });
     }
 
-    res.redirect('/cart');
+    // Return JSON response indicating success
+    res.redirect('/item');
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ success: false, error: err.message });
   }
 });
+
 
 router.delete('/remove-from-cart/:id', withAuth, async (req, res) => {
   try {
@@ -157,9 +144,25 @@ router.delete('/remove-from-cart/:id', withAuth, async (req, res) => {
   }
 });
 
+router.get('/edit-item/:id', withAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const itemData = await Item.findByPk(id);
+
+    if (!itemData) {
+      res.status(404).json({ message: 'Item not found' });
+      return;
+    } else {
+      const item = itemData.get({ plain: true });
+      res.render('edit-item', { item });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
-router.post('/edit-item/:id', withAuth, async (req, res) => {
+router.put('/edit-item/:id', withAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const { item_name, description, price } = req.body;
