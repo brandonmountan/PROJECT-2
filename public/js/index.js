@@ -11,8 +11,28 @@ Item.search = async function(query) {
   });
 }
 
+//this is message for checkout button when it is triggered
 function checkout() {
   alert("Thank you for your purchase!");
+}
+
+//this one is for add to cart button to notify the user that the item is added to cart
+window.onload = function() {
+  // Check localStorage on window load
+  if (localStorage.getItem('buttonClicked')) {
+      document.querySelector('.addToCartButton').style.backgroundColor = "red";
+  }
+}
+
+function changeColor(event, button) {
+  // Prevent the form from submitting
+  event.preventDefault();
+
+  button.style.backgroundColor = "purple";
+
+  // Set a value in localStorage
+  localStorage.setItem('buttonClicked', true);
+
 }
 
 //this is for delete item using item id
