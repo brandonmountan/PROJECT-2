@@ -61,9 +61,3 @@ async function removeFromCart(cartId) {
     console.error(error);
   }
 }
-// const cartItems = [];
-
-//     const items = {{items}};
-//     items.forEach(item => {
-//         item.isInCart = cartItems.some(cartItem => cartItem.id === item.id);
-//     });
