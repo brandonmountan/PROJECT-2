@@ -462,6 +462,12 @@ th {
     text-align: -webkit-match-parent
 }
 
+@media (min-width:1200px) {
+    tbody img {
+        width: 400px;
+    }
+    
+}
 tbody,
 td,
 tfoot,
@@ -472,7 +478,6 @@ tr {
     border-style: solid;
     border-width: 0
 }
-
 label {
     display: inline-block
 }
