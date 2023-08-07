@@ -27,7 +27,7 @@ const sess = {
 };
 
 app.use(session(sess));
-app.use(express.session());
+// app.use(express.session());
 
 const hbs = exphbs.create({helpers});
 
