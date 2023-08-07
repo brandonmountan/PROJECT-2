@@ -461,6 +461,18 @@ th {
     text-align: inherit;
     text-align: -webkit-match-parent
 }
+table tbody tr {
+    border-bottom: 1px solid #ddd; 
+}
+
+table th:last-child, table td:last-child {
+    border-right: none;
+}
+
+table {
+    border-collapse: collapse; 
+    width: 100%; 
+}
 
 @media (min-width:1200px) {
     tbody img {
