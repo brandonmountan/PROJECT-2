@@ -63,3 +63,76 @@
 #cart-pic:hover {
   transform: scale(1.4); /* Add a hover effect to scale the navbar links a little */
 }
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  margin-bottom: 5px;
+  border: 2px solid rgb(5, 92, 223);
+}
+.profile-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  color: rgb(5, 92, 223);
+}
+
+#cart-items ul {
+  list-style: none;
+  padding: 0;
+}
+
+#cart-items li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#cart-items img {
+  margin-right: 10px;
+}
+
+#cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+#cart-total p {
+  margin: 0;
+}
+
+#cart-total button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#empty-cart {
+  text-align: center;
+  display: none;
+  margin-top: 20px;
+  color: #888;
+}
+
+#checkout-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.danger-message{
+  color: red;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}

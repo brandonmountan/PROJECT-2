@@ -3,7 +3,8 @@ const { Item, User } = require('../models');
 const withAuth = require('../utils/auth');
 const imagesData = require('../models/imagesData');
 const { getGreeting } = require('../public/js/helpers');
-// const profileData = require('../models/profileData');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
 
 router.get('/', async (req, res) => {
   try {
@@ -116,7 +117,6 @@ router.get('/login', (req, res) => {
 router.get('/sign-up', async (req, res) => {
   res.render('sign-up');
 });
-
 
 // router.post('/logout', (req, res) => {
 //   if (req.session.logged_in) {

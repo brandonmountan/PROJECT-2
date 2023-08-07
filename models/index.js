@@ -1,7 +1,7 @@
 // Import models
+const Cart = require('./Cart');
 const User = require('./User');
 const Item = require('./Item');
-const Cart = require('./Cart');
 
 User.hasMany(Item, {
   foreignKey: 'user_id',

@@ -31,3 +31,24 @@ function deleteItem(itemId) {
       });
   }
 
+// Function to handle removing an item from the cart
+async function removeFromCart(cartId) {
+  try {
+    const response = await fetch(`/remove-from-cart/${cartId}`, {
+      method: 'DELETE',
+    });
+    if (response.ok) {
+      window.location.reload();
+    } else {
+      console.log('Error removing item from cart');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+const cartItems = [];
+
+    const items = {{items}};
+    items.forEach(item => {
+        item.isInCart = cartItems.some(cartItem => cartItem.id === item.id);
+    });
