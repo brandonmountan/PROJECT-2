@@ -1,0 +1,45 @@
+<div class="container position-relative">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <div>
+                <form class="p-3 p-xl-4" action="/upload-item" method="post" enctype="multipart/form-data">
+                    <h2>New Item</h2>
+                    <div class="new-postContainer">
+                        <div class="mb-3">
+                            <label for="item-name">Item Name:</label>
+                            <input class="form-control" type="text" id="item-name" name="item_name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description">Description:</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="price">Price:</label>
+                            <input class="form-control" type="number" id="price" name="price" step="0.01" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="start-date">Start Date:</label>
+                            <input class="form-control" type="date" id="start-date" name="start_date" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="end-date">End Date:</label>
+                            <input class="form-control" type="date" id="end-date" name="end_date" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="image-upload">Upload Image:</label>
+                             <input class="form-control" type="file" id="image-upload" name="image" accept="image/*">
+                        </div>
+                        <div>
+                            <button class="btn btn-primary d-block w-100" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

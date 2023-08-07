@@ -1,0 +1,28 @@
+<div class="container position-relative">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            
+            <div>
+                {{#if items.length}}
+                <div class ="profile-header"><h2>My Items</h2>
+                <a href="/cart">View Cart</a>
+                </div>
+                <ul>
+                    {{#each items}}
+                    <li>
+                        <h2>{{item_name}}</h2>
+                        <p>{{description}}</p>
+                        <p>Price: ${{price}}</p>
+                        <img src="{{image_url}}" alt="{{item_name}}" width = '100'>.
+                        <a href="/edit-item/{{id}}">Edit</a>
+                        <button class="btn btn-primary" onclick="deleteItem({{id}})">Delete</button>
+                    </li>
+                    {{/each}}
+                </ul>
+                {{else}}
+                <p>No items found.</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

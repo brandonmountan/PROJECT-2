@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>product</title>
+    <link rel="stylesheet" href="../public/product/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.reflowhq.com/v2/toolkit.min.css">
+</head>
+
+<body>
+     <section class="search-section py-4 py-xl-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <form action="/search" method="GET" class="search-form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="query" placeholder="Search for items..." required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <a href="/post-item" class="btn btn-primary">or Post here</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item"><a class="nav-link active" href="#">rent</a></li>
+            </ul>
+        </div>
+     <h1>Items List</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Item Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Posted by</th>
+                <th>Add to cart</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each items}}
+                <tr>
+                <td><img src="{{image_url}}" alt="{{item_name}}" width = '100'></td>
+                <td>{{item_name}}</td>
+                <td>{{description}}</td>
+                <td>{{price}}</td>
+                <td><a href="/user/{{user.first_name}}">{{user.first_name}}</a></td>
+                <td>
+          <form action="/add-to-cart/{{id}}" method="POST">
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+          </form>
+        </td>
+                </tr>
+
+            {{/each}}
+        </tbody>
+    </table>
+    <script src="../public/product/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>
+    <script src="../public/product/assets/js/bs-init.js"></script>
+</body>
+
+</html>
