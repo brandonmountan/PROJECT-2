@@ -11,6 +11,10 @@ Item.search = async function(query) {
   });
 }
 
+function checkout() {
+  alert("Thank you for your purchase!");
+}
+
 //this is for delete item using item id
 function deleteItem(itemId) {
     fetch(`/delete-item/${itemId}`, {
