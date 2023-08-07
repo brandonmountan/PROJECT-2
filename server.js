@@ -7,6 +7,7 @@ const session = require('express-session');
 const handlebars = require('handlebars');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const methodOverride = require('method-override');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -32,6 +33,8 @@ app.use(session(sess));
 // app.use(express.session());
 
 const hbs = exphbs.create({helpers});
+
+app.use(methodOverride('_method'));
 
 // Custom handlebars helpers
 app.engine('handlebars', hbs.engine);

@@ -14,9 +14,10 @@
       {{/each}}
     </ul>
     <div id="cart-total">
-      <p>Total: $<span id="total-amount">0.00</span></p>
-      <button class="btn btn-danger d-block" onclick="checkout()">Checkout</button>
-    </div>
+  <p>Total: $<span id="total-amount">{{totalPrice}}</span></p>
+ <button class="btn btn-danger d-block" onclick="checkout()">Checkout</button>
+</div>
+
   {{else}}
     <section id="empty-cart">
       <p>Your cart is empty.</p>

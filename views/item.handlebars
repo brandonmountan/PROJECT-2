@@ -31,6 +31,7 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item"><a class="nav-link active" href="#">rent</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">buy</a></li>
             </ul>
         </div>
      <h1>Items List</h1>
@@ -49,15 +50,15 @@
         <tbody>
             {{#each items}}
                 <tr>
-                <td><img src="{{image_url}}" alt="{{item_name}}" width = '100'></td>
+                <td><img src="{{image_url}}" alt="{{item_name}}" width = '200'></td>
                 <td>{{item_name}}</td>
                 <td>{{description}}</td>
                 <td>{{price}}</td>
-                <td><a href="/user/{{user.first_name}}">{{user.first_name}}</a></td>
+                <td id = "first_name">{{user.first_name}}</td>
                 <td>
-          <form action="/add-to-cart/{{id}}" method="POST">
-            <button type="submit" class="btn btn-primary">Add to Cart</button>
-          </form>
+      <form id="addToCartForm" action="/add-to-cart/{{id}}" method="POST">
+    <button type="submit" class="btn btn-primary addToCartButton" data-item-id="{{id}}" onclick="changeColor(event, this)">Add to Cart</button>
+</form>
         </td>
                 </tr>
 

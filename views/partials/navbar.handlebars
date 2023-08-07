@@ -48,11 +48,12 @@
   <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
   <li class="nav-item"><a class="nav-link" href="/item">Items</a></li>
   <li class="nav-item"><a class="nav-link" href="/profile">Dashboard</a></li>
+    <li class="nav-item"><a class="nav-link" href="/post-item">post item</a></li>
+  <li class="nav-item"><a class="nav-link" href="/cart"><img src="../../public/assets/items/cart.png" id = "cart-pic" width = "25"></a></li>
 
   {{#if logged_in}}
     <li class="nav-item" id="logout"><a class="nav-link" href="#">Logout</a></li>
-    <li class="nav-item nav-link">{{greeting}}</li>
-    <li class="nav-item"><a class="nav-link" href="/cart"><img src="../../public/assets/items/cart.png" id = "cart-pic" width = "25"></a></li>
+    <li class="nav-item nav-link" id="greeting" style="color: rgb(214, 82, 82);">{{greeting}} <span style="color: rgb(59, 59, 221)">{{this.first_name}}</span></li>
   {{else}}
     <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
     <a class="btn btn-primary ms-md-2" role="button" href="/sign-up">Signup</a>
