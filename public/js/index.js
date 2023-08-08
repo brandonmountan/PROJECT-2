@@ -35,6 +35,10 @@ function changeColor(event, button) {
 
 }
 
+function contactUs() {
+  alert("Thank you for your message!");
+}
+
 //this is for delete item using item id
 function deleteItem(itemId) {
     fetch(`/delete-item/${itemId}`, {
